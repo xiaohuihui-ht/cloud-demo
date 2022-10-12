@@ -1,5 +1,6 @@
 package cn.itcast.user.web;
 
+import cn.itcast.user.config.PatternProperties;
 import cn.itcast.user.pojo.User;
 import cn.itcast.user.service.UserService;
 import lombok.extern.slf4j.Slf4j;
@@ -14,18 +15,21 @@ import java.time.format.DateTimeFormatter;
 @Slf4j
 @RestController
 @RequestMapping("/user")
-@RefreshScope
+//@RefreshScope
 public class UserController {
 
     @Autowired
     private UserService userService;
 
-    @Value("${pattern.dateformat}")
-    private String dateformat;
+//    @Value("${pattern.dateformat}")
+//    private String dateformat;
+
+    @Autowired
+    private PatternProperties properties;
 
     @GetMapping("now")
     public String now(){
-        return LocalDateTime.now().format(DateTimeFormatter.ofPattern(dateformat));
+        return LocalDateTime.now().format(DateTimeFormatter.ofPattern(properties.getDateformat()));
     }
 
     /**
