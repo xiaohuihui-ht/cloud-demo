@@ -13,9 +13,11 @@ spring:
           # uri: http://localhost:8082/ # 路由的目标地址，http代表固定地址
           predicates: # 路由断言，判断请求是否符合规则
             - Path=/user/** # 路径断言，判断路径是否是以/user开头，如果是则符合
-          filters:
-            - AddRequestHeader=Str,Hello word!
+#          filters:
+#            - AddRequestHeader=Str,Hello word!
         - id: order-service
           uri: lb://orderservice
           predicates:
             - Path=/order/**
+      default-filters: # 默认过滤器
+        - AddRequestHeader=Str,Hello word!
